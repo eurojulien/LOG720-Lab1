@@ -2,11 +2,19 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import org.omg.CORBA.ORBPackage.InvalidName;
+import org.omg.CosNaming.NameComponent;
+import org.omg.CosNaming.NamingContextExt;
+import org.omg.CosNaming.NamingContextExtHelper;
+
 public class ClientVoiture {
 	
 	static boolean dossierChoisi = false;
+	static String[] arguments;
 
 	public static void main(String[] args) {
+		
+		arguments = args;
 		
 		ecrire("Client de la voiture");
 		
@@ -190,6 +198,23 @@ public class ClientVoiture {
 	private static void accederDossier()
 	{
 		dossierChoisi = true;
+	}
+	
+	private NamingContextExt obtenirNameService()
+	{
+		org.omg.CORBA.ORB orb = org.omg.CORBA.ORB.init(arguments, null);
+
+		NamingContextExt nc = null;
+		
+		// get hold of the naming service
+		try {
+			nc = NamingContextExtHelper.narrow(orb.resolve_initial_references("NameService"));
+		} catch (InvalidName e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return nc;
 	}
 	
 }
