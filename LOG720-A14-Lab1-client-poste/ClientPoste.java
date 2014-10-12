@@ -48,6 +48,7 @@ public class ClientPoste {
 					break;
 				case 4: 
 					termine = true;
+					ecrire("Terminé.");
 					break;
 			}
 			

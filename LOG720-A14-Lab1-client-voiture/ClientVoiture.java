@@ -77,6 +77,7 @@ public class ClientVoiture {
 				quitterDossier();
 				break;
 			case 7:
+				ecrire("Terminé.");
 				return true;
 		}
 		
@@ -109,6 +110,7 @@ public class ClientVoiture {
 				accederDossier();
 				break;
 			case 5:
+				ecrire("Terminé.");
 				return true;
 		}
 		
