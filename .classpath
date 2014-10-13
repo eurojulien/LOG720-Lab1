@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="LOG720-A14-Lab1-client-poste"/>
+	<classpathentry kind="src" path="LOG720-A14-Lab1-client-voiture"/>
+	<classpathentry kind="src" path="LOG720-A14-lab1-idl/generated"/>
+	<classpathentry kind="src" path="Dossiers"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
