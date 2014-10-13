@@ -7,14 +7,32 @@ import org.omg.CosNaming.NameComponent;
 import org.omg.CosNaming.NamingContextExt;
 import org.omg.CosNaming.NamingContextExtHelper;
 
-public class ClientPoste {
+import ca.etsmtl.log720.lab1.BanqueDossiers;
+import ca.etsmtl.log720.lab1.BanqueInfractions;
+import ca.etsmtl.log720.lab1.CollectionDossier;
+import ca.etsmtl.log720.lab1.CollectionInfraction;
+import ca.etsmtl.log720.lab1.DossierHelper;
+import ca.etsmtl.log720.lab1.Infraction;
+import ca.etsmtl.log720.lab1.InfractionHelper;
+
+public class ClientPoste implements BanqueDossiers, BanqueInfractions {
 	
 	static boolean dossierChoisi = false;
 	static String[] arguments;
-
+	static BanqueInfractions banqInfraction;
+	static BanqueDossiers banqDossier;
+	static org.omg.CORBA.ORB orb;
+	
 	public static void main(String[] args) {
 		
 		arguments = args;
+		
+		NamingContextExt nce = obtenirNameService();
+		
+		org.omg.CORBA.Object obj = nce.resolve(nce.to_name("infraction"))
+		
+		banqInfraction = InfractionHelper.narrow(nce.to_name("infraction"));			
+		banqDossier = BanqueDossierHelper.narrow(nce.to_name("dossier"));
 		
 		ecrire("Client de la voiture");
 		
@@ -53,6 +71,13 @@ public class ClientPoste {
 			}
 			
 		}
+		try{
+			orb.shutdown(true);
+			System.out.println("Le client a été fermé.");
+		} catch (Exception e){
+			e.printStackTrace();
+		}
+		
 
 	}
 	
@@ -101,30 +126,85 @@ public class ClientPoste {
 		}
 	}
 	
+	/**
+	 * Afficher les infractions dans la collection. 
+	 **/
 	private static void afficherInfractions()
 	{
 		
+		System.out.println("Voici la liste des infractions /n /n");
+		CollectionInfraction cInfrac = banqInfraction.infractions();
+				
+		for(int = 0; i < cInfrac.size(); i++){
+			System.out.println(cInfrac.getInfraction(i)._toString());
+			// Faire une petite pause avant d'afficher les autres infractions.
+			Thread.sleep(2000);
+		}
+		
 	}
-
+	
+	/**
+	 * Afficher les dossiers dans la collection. 
+	 **/
 	private static void afficherDossiers()
 	{
+		System.out.println("Voici la liste des infractions /n /n");
+		CollectionDossier cDoss = banqDossier.dossiers();
 		
+		for(int i = 0; i<cDoss.size(); i++){
+			System.out.println(cDoss.getDossier(i)._toString());
+			// Faire une petite pause avant d'afficher les autres infractions.
+			Thread.sleep(2000);
+		}
 	}
 	
+	/**
+	 * Ajout d'un nouveau dossier dans la banque de dossier
+	 **/
 	private static void ajouterDossier()
 	{
+		System.out.println("Veuillez, S.V.P, entrer les informations nécessaire au dossier ");
 		
+		System.out.println("Nom de famille : ");
+		String nom = System.in.read();
+		
+		System.out.println("Prénom : ");
+		String prenom = System.in.read();
+		
+		System.out.println("Numéro de plaque : ");
+		String numPlaque = System.in.read();
+		
+		System.out.println("Numéro de permis de conduire : ");
+		String numPermis = System.in.read();
+		
+		try{
+			banqDossier.ajouterDossier(nom, prenom, noPermis, noPlaque);
+		} catch(NoPermisExisteDejaException e){
+			System.out.println("Le numéro de permis existe déjà.");
+		}
 	}
 	
-	private static void ajouterInfraction()
+	private static void ajouterInfraction(BanqueInfractions banqInfrac)
 	{
 		
+		System.out.println("Ajout d'un nouveau dossier.")
+		System.out.println("Veuillez, S.V.P, saisir la description de l'infraction : ");
+		String desc = System.in.read();
+		
+		System.out.println("Veuillez, S.V.P, saisir le niveau de l'infraction :");
+		int niveau = Integer.parseInt(System.in.read());
+		
+		try{
+			banqInfraction.ajouterInfraction(desc, niveau);
+		}catch (NiveauHorsBornesException e){
+			System.out.println("Le niveau est hors bornes.");
+		}
 	}
 
 	
 	private NamingContextExt obtenirNameService()
 	{
-		org.omg.CORBA.ORB orb = org.omg.CORBA.ORB.init(arguments, null);
+		orb = org.omg.CORBA.ORB.init(arguments, null);
 
 		NamingContextExt nc = null;
 		
