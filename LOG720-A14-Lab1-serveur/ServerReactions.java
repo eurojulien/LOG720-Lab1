@@ -39,7 +39,7 @@ public class Server {
 						NamingContextExtHelper.narrow(
 								objectRelationBroker.resolve_initial_references("NameService"));
 				
-				nc.bind(nc.to_name("server"), obj);
+				nc.bind(nc.to_name("BanqueReactions"), obj);
 			}
 		
 		}
