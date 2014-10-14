@@ -1,9 +1,10 @@
 package src;
+
 import java.io.*;
 
 import org.omg.CosNaming.*;
 
-public class Server {
+public class ServerInfraction {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -19,7 +20,7 @@ public class Server {
 			portableObjectAdapter.the_POAManager().activate();
 		
 			org.omg.CORBA.Object obj = portableObjectAdapter.
-									 servant_to_reference(new BanqueDossierObject());
+									 servant_to_reference(new BanqueInfractionsObject());
 		
 			if (args.length == 1){
 				
@@ -39,7 +40,7 @@ public class Server {
 						NamingContextExtHelper.narrow(
 								objectRelationBroker.resolve_initial_references("NameService"));
 				
-				nc.bind(nc.to_name("BanqueReactions"), obj);
+				nc.bind(nc.to_name("ServeurInfractions"), obj);
 			}
 		
 		}

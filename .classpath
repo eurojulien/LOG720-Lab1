@@ -3,7 +3,10 @@
 	<classpathentry kind="src" path="LOG720-A14-Lab1-client-poste"/>
 	<classpathentry kind="src" path="LOG720-A14-Lab1-client-voiture"/>
 	<classpathentry kind="src" path="LOG720-A14-lab1-idl/generated"/>
-	<classpathentry kind="src" path="Dossiers"/>
+	<classpathentry kind="src" path="server-dossier"/>
+	<classpathentry kind="src" path="server-reaction"/>
+	<classpathentry kind="src" path="server-infraction"/>
+	<classpathentry kind="src" path="projet-idl"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

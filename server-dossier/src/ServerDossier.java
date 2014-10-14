@@ -3,7 +3,7 @@ import java.io.*;
 
 import org.omg.CosNaming.*;
 
-public class Server {
+public class ServerDossier {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub

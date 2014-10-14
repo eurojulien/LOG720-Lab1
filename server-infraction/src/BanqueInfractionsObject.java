@@ -1,4 +1,5 @@
 package src;
+
 import ca.etsmtl.log720.lab1.*;
 
 public class BanqueInfractionsObject extends BanqueInfractionsPOA{

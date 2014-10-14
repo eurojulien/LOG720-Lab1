@@ -1,4 +1,5 @@
 package src;
+
 import java.util.ArrayList;
 
 import ca.etsmtl.log720.lab1.*;
